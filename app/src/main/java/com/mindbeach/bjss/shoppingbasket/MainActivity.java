@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ListView mListView;
     private Button mCheckoutBtn;
+    private Button mClearBtn;
 
     private ShoppingItemAdapter mAdapter;
 
@@ -34,17 +35,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         mListView = (ListView) findViewById(R.id.list_view);
         mCheckoutBtn = (Button) findViewById(R.id.checkout_btn);
+        mClearBtn = (Button) findViewById(R.id.clear_btn);
 
         mAdapter = new ShoppingItemAdapter(this);
         mAdapter.setShoppingItems(Constants.ITEMS_DATABASE);
         mListView.setAdapter(mAdapter);
 
         mCheckoutBtn.setOnClickListener(this);
+        mClearBtn.setOnClickListener(this);
     }
 
     private void checkout() {
@@ -57,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putParcelableArrayListExtra(Constants.EXTRA_SHOPPING_ITEMS, items);
             startActivity(intent);
         }
+    }
+
+    private void clear() {
+        mAdapter.clearAmounts();
     }
 
     private boolean isBasketEmpty(List<ShoppingItem> items) {
@@ -73,6 +78,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.checkout_btn:
                 checkout();
+                break;
+
+            case R.id.clear_btn:
+                clear();
                 break;
         }
     }

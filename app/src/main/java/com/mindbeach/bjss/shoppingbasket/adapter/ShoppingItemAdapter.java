@@ -52,6 +52,13 @@ public class ShoppingItemAdapter extends BaseAdapter {
         return position;
     }
 
+    public void clearAmounts() {
+        for (ShoppingItem item : mItems) {
+            item.setAmount(0);
+        }
+        notifyDataSetChanged();
+    }
+
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         if (row == null) {
