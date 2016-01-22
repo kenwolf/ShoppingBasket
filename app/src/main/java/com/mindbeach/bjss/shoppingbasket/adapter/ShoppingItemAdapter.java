@@ -24,7 +24,7 @@ public class ShoppingItemAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
 
-    private List<ShoppingItem> mItems = new ArrayList<ShoppingItem>();
+    private ArrayList<ShoppingItem> mItems = new ArrayList<ShoppingItem>();
 
     public ShoppingItemAdapter(Context context) {
         mContext = context;
@@ -34,6 +34,10 @@ public class ShoppingItemAdapter extends BaseAdapter {
     public void setShoppingItems(ArrayList<ShoppingItem> items) {
         mItems = items;
         notifyDataSetChanged();
+    }
+
+    public ArrayList<ShoppingItem> getItems() {
+        return mItems;
     }
 
     public int getCount() {

@@ -2,6 +2,7 @@
     <string name="app_name">Shopping Basket</string>
     <string name="action_settings">Settings</string>
 
+    <!-- ITEMS -->
     <string name="peas">Peas</string>
     <string name="bag">bag</string>
     <string name="eggs">Eggs</string>
@@ -11,6 +12,10 @@
     <string name="beans">Beans</string>
     <string name="can">can</string>
 
+    <!-- LABELS -->
     <string name="checkout">Checkout</string>
+
+    <!-- MESSAGES -->
+    <string name="msg_no_items">Please add some items to your basket!</string>
 
 </resources>

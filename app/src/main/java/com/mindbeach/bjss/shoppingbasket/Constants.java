@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class Constants {
 
+    public static final String EXTRA_SHOPPING_ITEMS = "extra_shopping_items";
+
     public static ArrayList<ShoppingItem> ITEMS_DATABASE = new ArrayList<>();
     // TODO move this to an sqlite db
     static {
