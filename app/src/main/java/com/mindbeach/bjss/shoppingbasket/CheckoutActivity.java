@@ -8,15 +8,19 @@ import android.widget.TextView;
 
 import com.mindbeach.bjss.shoppingbasket.model.ShoppingItem;
 
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CheckoutActivity extends AppCompatActivity {
 
     private static final String TAG = "CheckoutActivity";
+    private static NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.UK);
 
     private TextView mTotalPriceTxt;
 
-    private List<ShoppingItem> mItems;
+    private List<ShoppingItem> mItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,20 @@ public class CheckoutActivity extends AppCompatActivity {
         }
 
         mTotalPriceTxt = (TextView) findViewById(R.id.total_price);
+        calculateTotal();
+    }
+
+    private void calculateTotal() {
+        if (mItems.size() == 0)
+            Log.e(TAG, "No items in basket");
+        else {
+            int totalInPence = 0;
+            for (ShoppingItem item : mItems) {
+                totalInPence += item.getPriceInPence() * item.getAmount();
+            }
+            mTotalPriceTxt.setText(numberFormat.format((double) totalInPence / 100d));
+        }
+
     }
 
 }
