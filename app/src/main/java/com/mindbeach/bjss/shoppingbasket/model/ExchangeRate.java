@@ -36,10 +36,7 @@ public class ExchangeRate implements Parcelable {
 
     @Override
     public String toString() {
-        return "ExchangeRate{" +
-                "code='" + code + '\'' +
-                ", rate=" + rate +
-                '}';
+        return code;
     }
 
 
