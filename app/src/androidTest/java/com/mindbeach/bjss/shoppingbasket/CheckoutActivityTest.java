@@ -10,6 +10,7 @@ import com.mindbeach.bjss.shoppingbasket.model.ExchangeRate;
 import com.mindbeach.bjss.shoppingbasket.model.ShoppingItem;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Ken on 23/01/2016.
@@ -21,8 +22,6 @@ public class CheckoutActivityTest extends ActivityInstrumentationTestCase2 {
     private TextView mTotalTxt;
     private Spinner mSpinner;
     private ArrayList<ShoppingItem> mItems;
-    private ArrayList<ExchangeRate> mRates;
-
 
     public CheckoutActivityTest() {
         super(CheckoutActivity.class);
@@ -54,7 +53,28 @@ public class CheckoutActivityTest extends ActivityInstrumentationTestCase2 {
         assertTrue(mSpinner != null); // Spinner  button should not be null
         assertTrue(mItems != null); // Items shouldn't be null
         assertEquals(mItems.size(), 1); // Items size should be 1
-        assertEquals(mSpinner.getAdapter().getCount(), 1); // We just have 1 rate
+    }
+
+    public void testHttp() {
+        final CheckoutActivity.GetRatesTask mTask = ((CheckoutActivity) mActivity).getRatesTask();
+
+        mActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mTask.execute(Constants.FIXER_ENDPOINT);
+            }
+        });
+        try {
+            mTask.get();
+            assertTrue(mSpinner.getAdapter().getCount() > 1); // Should be at least 1 other rate in there
+            assertTrue(mSpinner.getAdapter().getItem(1) instanceof ExchangeRate); // And it should be an exchange rate
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void testCalculations() {

@@ -139,7 +139,11 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterView.O
         return success;
     }
 
-    private class GetRatesTask extends AsyncTask<String, Integer, Boolean> {
+    public GetRatesTask getRatesTask() {
+        return new GetRatesTask();
+    }
+
+    public class GetRatesTask extends AsyncTask<String, Integer, Boolean> {
         protected Boolean doInBackground(String... urls) {
             boolean success = false;
             try {
