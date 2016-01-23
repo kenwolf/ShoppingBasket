@@ -27,6 +27,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Created by Ken on 22/01/2016.
+ */
 public class CheckoutActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "CheckoutActivity";

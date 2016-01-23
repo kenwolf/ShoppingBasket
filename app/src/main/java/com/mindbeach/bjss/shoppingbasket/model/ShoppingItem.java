@@ -21,6 +21,9 @@ public class ShoppingItem implements Parcelable{
         this.priceInPence = priceInPence;
     }
 
+    public ShoppingItem() {
+    }
+
     public void incrementAmount() {
         amount++;
     }
