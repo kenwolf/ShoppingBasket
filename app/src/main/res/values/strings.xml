@@ -15,8 +15,10 @@
     <!-- LABELS -->
     <string name="checkout">Checkout</string>
     <string name="clear">Clear</string>
+    <string name="total">Total:</string>
 
     <!-- MESSAGES -->
     <string name="msg_no_items">Please add some items to your basket!</string>
+    <string name="select_exchange_rate">Select an exchange rate:</string>
 
 </resources>

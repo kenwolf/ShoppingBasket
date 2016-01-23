@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.mindbeach.bjss.shoppingbasket.R;
@@ -66,8 +67,8 @@ public class ShoppingItemAdapter extends BaseAdapter {
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.name = (TextView) row.findViewById(R.id.name);
             viewHolder.price = (TextView) row.findViewById(R.id.price);
-            viewHolder.less = (Button) row.findViewById(R.id.less_btn);
-            viewHolder.more = (Button) row.findViewById(R.id.more_btn);
+            viewHolder.less = (ImageButton) row.findViewById(R.id.less_btn);
+            viewHolder.more = (ImageButton) row.findViewById(R.id.more_btn);
             viewHolder.amount = (TextView) row.findViewById(R.id.amount);
             viewHolder.container = (TextView) row.findViewById(R.id.container);
             row.setTag(viewHolder);
@@ -105,8 +106,8 @@ public class ShoppingItemAdapter extends BaseAdapter {
         private TextView name;
         private TextView price;
         private TextView container;
-        private Button less;
-        private Button more;
+        private ImageButton less;
+        private ImageButton more;
         private TextView amount;
 
     }

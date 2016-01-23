@@ -56,6 +56,7 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterView.O
         mRatesSpinner.setOnItemSelectedListener(this);
 
         if (savedInstanceState == null) {
+            // TODO check for internet connectivity, show error msg, etc.
             new GetRatesTask().execute(Constants.FIXER_ENDPOINT);
         } else {
             mRates = savedInstanceState.getParcelableArrayList(RATES);
@@ -104,7 +105,7 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterView.O
         Log.d(TAG, "Got conversion: " + convertedTotal);
 
         Currency curr = Currency.getInstance(selected.getCode());
-        DecimalFormat df = new DecimalFormat("\u00A4#.##");
+        DecimalFormat df = new DecimalFormat("\u00A4#.00");
         df.setCurrency(curr);
         mTotalPriceTxt.setText(df.format(convertedTotal));
     }

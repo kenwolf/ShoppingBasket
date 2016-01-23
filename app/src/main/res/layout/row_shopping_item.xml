@@ -10,37 +10,55 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/standard_padding"
+        android:padding="@dimen/standard_spacing"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         android:layout_weight="1"/>
 
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/standard_padding"/>
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textSize="13sp"
+        android:layout_marginLeft="@dimen/small_spacing"
+        android:text="/"/>
 
     <TextView
         android:id="@+id/container"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/container_width"
         android:layout_height="wrap_content"
-        android:padding="@dimen/standard_padding"/>
+        android:gravity="right"
+        android:textSize="13sp"
+        android:layout_marginRight="@dimen/standard_spacing"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/less_btn"
-        android:layout_width="@dimen/button_width"
-        android:layout_height="wrap_content"
-        android:text="-"/>
+        android:layout_width="@dimen/button_size"
+        android:layout_height="@dimen/button_size"
+        android:src="@drawable/icon_minus"/>
 
     <TextView
         android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/small_spacing"
+        android:layout_marginRight="@dimen/small_spacing"
+        android:textColor="@color/black"
         android:text="0"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/more_btn"
-        android:layout_width="@dimen/button_width"
-        android:layout_height="wrap_content"
-        android:text="+" />
+        android:layout_width="@dimen/button_size"
+        android:layout_height="@dimen/button_size"
+        android:layout_marginRight="@dimen/standard_spacing"
+        android:src="@drawable/icon_plus" />
 
 </LinearLayout>
