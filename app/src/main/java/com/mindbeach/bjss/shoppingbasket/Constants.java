@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class Constants {
 
+    public static final String FIXER_ENDPOINT = "http://api.fixer.io/latest?base=GBP";
+
     public static final String EXTRA_SHOPPING_ITEMS = "extra_shopping_items";
 
     public static ArrayList<ShoppingItem> ITEMS_DATABASE = new ArrayList<>();
