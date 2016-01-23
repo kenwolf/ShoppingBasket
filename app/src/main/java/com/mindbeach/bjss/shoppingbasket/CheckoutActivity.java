@@ -85,7 +85,7 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void calculateGBPTotal() {
-        if (mItems.size() == 0)
+        if (mItems == null || mItems.size() == 0)
             Log.e(TAG, "No items in basket");
         else {
             int totalInPence = 0;
@@ -102,13 +102,14 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (mGBPTotal == null) return;
         ExchangeRate selected = mRates.get(position);
         Log.d(TAG, "Selected rate: " + selected);
         BigDecimal convertedTotal = mGBPTotal.multiply(selected.getRate());
         Log.d(TAG, "Got conversion: " + convertedTotal);
 
         Currency curr = Currency.getInstance(selected.getCode());
-        DecimalFormat df = new DecimalFormat("\u00A4#.00");
+        DecimalFormat df = new DecimalFormat("\u00A40.00");
         df.setCurrency(curr);
         mTotalPriceTxt.setText(df.format(convertedTotal));
     }
