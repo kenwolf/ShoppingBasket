@@ -29,6 +29,10 @@ import java.util.Locale;
 
 /**
  * Created by Ken on 22/01/2016.
+ * Displays the total price in GBP of the items passed to this activity.
+ * Calls fixed.io endpoint and parses response into ExchangeRates.
+ * Populates a Spinner which allows the user to see the total in different
+ * currencies.
  */
 public class CheckoutActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -69,6 +73,28 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterView.O
         calculateGBPTotal();
     }
 
+    /**
+     * Calculate the total price in GBP. We should always be able to do this
+     * since we should be getting the items array in our intent extras. This is
+     * *not* dependent on getting exchange rates.
+     */
+    private void calculateGBPTotal() {
+        if (mItems == null || mItems.size() == 0)
+            Log.e(TAG, "No items in basket");
+        else {
+            int totalInPence = 0;
+            for (ShoppingItem item : mItems) {
+                totalInPence += item.getPriceInPence() * item.getAmount();
+            }
+            mTotalPriceTxt.setText(numberFormat.format((double) totalInPence / 100d));
+            mGBPTotal = new BigDecimal(totalInPence / 100d);
+            Log.d(TAG, "Got GBPTotal: " + mGBPTotal);
+        }
+    }
+
+    /**
+     * Populate the spinner with items from the mRates list
+     */
     private void populateSpinner() {
         ArrayAdapter<ExchangeRate> adapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, mRates);
@@ -84,22 +110,14 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterView.O
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    private void calculateGBPTotal() {
-        if (mItems == null || mItems.size() == 0)
-            Log.e(TAG, "No items in basket");
-        else {
-            int totalInPence = 0;
-            for (ShoppingItem item : mItems) {
-                totalInPence += item.getPriceInPence() * item.getAmount();
-            }
-            mTotalPriceTxt.setText(numberFormat.format((double) totalInPence / 100d));
-            mGBPTotal = new BigDecimal(totalInPence / 100d);
-            Log.d(TAG, "Got GBPTotal: " + mGBPTotal);
-        }
-    }
-
-
-
+    /**
+     * Sets the total price text based on the GBPTotal and the currently selected
+     * exchange rate
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (mGBPTotal == null) return;
@@ -117,6 +135,12 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onNothingSelected(AdapterView<?> parent) { }
 
+    /**
+     * Parse the JSON content of the Fixer.io response into a list of
+     * Exchange Rates
+     * @param content the content received from the http call
+     * @return true if successful
+     */
     private boolean parse(String content) {
         boolean success = false;
         // let's inject GBP as the first rate
@@ -124,7 +148,7 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterView.O
         try {
             JSONObject json = new JSONObject(content);
             String base = json.getString("base");
-            String date = json.getString("date");
+            String date = json.getString("date"); // TODO do something with this?
             JSONObject rates = json.getJSONObject("rates");
             for (Iterator<String> keys = rates.keys(); keys.hasNext(); ) {
                 String code = keys.next();
@@ -143,6 +167,10 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterView.O
         return new GetRatesTask();
     }
 
+    /**
+     * AsyncTask that makes http call to Fixer.io and parses JSON into the
+     * mRates list
+     */
     public class GetRatesTask extends AsyncTask<String, Integer, Boolean> {
         protected Boolean doInBackground(String... urls) {
             boolean success = false;

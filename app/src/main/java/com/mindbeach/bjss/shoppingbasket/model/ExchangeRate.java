@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 
 /**
  * Created by Ken on 23/01/2016.
+ * Represents an exchange rate, with 3 letter code and rate.
+ * This will normally be populated from parsing fixer.io
  */
 public class ExchangeRate implements Parcelable {
 

@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 /**
  * Created by Ken on 22/01/2016.
+ * Represents a ShoppingItem available for purchase.
+ * Additionally holds an amount field which represents the current amounts of this item
+ * the user wishes to purchase.
  */
 public class ShoppingItem implements Parcelable{
 
@@ -12,7 +15,7 @@ public class ShoppingItem implements Parcelable{
     private int containerNameResId;
     private int priceInPence;
 
-    // TODO move this out into a separate purchase
+    // TODO move this out into a separate purchase/basket object/table
     private int amount;
 
     public ShoppingItem(int nameResId, int containerNameResId, int priceInPence) {

@@ -10,12 +10,15 @@ import java.util.List;
  */
 public class Constants {
 
+    // Fixed.io endpoint to call to get exchange rates
     public static final String FIXER_ENDPOINT = "http://api.fixer.io/latest?base=GBP";
 
+    // Intent extra for the list of ShoppingItems we pass
     public static final String EXTRA_SHOPPING_ITEMS = "extra_shopping_items";
 
-    public static ArrayList<ShoppingItem> ITEMS_DATABASE = new ArrayList<>();
+    // The list of ShoppingItems available for purchase
     // TODO move this to an sqlite db
+    public static ArrayList<ShoppingItem> ITEMS_DATABASE = new ArrayList<>();
     static {
         ITEMS_DATABASE.add(new ShoppingItem(R.string.peas, R.string.bag, 95));
         ITEMS_DATABASE.add(new ShoppingItem(R.string.eggs, R.string.dozen, 210));

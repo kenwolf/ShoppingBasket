@@ -12,6 +12,12 @@ import java.net.URL;
  */
 public class Util {
 
+    /**
+     * Coverts an InputSream to a String
+     * @param stream the InputStream
+     * @return the String
+     * @throws IOException
+     */
     public static String convertInputStreamToString(InputStream stream) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
         StringBuilder sb = new StringBuilder();
@@ -24,6 +30,11 @@ public class Util {
         return sb.toString();
     }
 
+    /**
+     * Get the contents of an HTTP call - assumes it's text content
+     * @param url
+     * @return String contents
+     */
     public static String getContent(URL url) {
         String content = null;
         InputStream is = null;

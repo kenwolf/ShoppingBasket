@@ -14,6 +14,11 @@ import com.mindbeach.bjss.shoppingbasket.model.ShoppingItem;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Displays a list of items available for purchase and allows the user to change amounts..
+ * The user can also optionally clear all quantities and check out to move to the next
+ * activity
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
@@ -42,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mClearBtn.setOnClickListener(this);
     }
 
+    /**
+     * Launched the CheckoutActivity, passing a list of the items and amounts
+     */
     private void checkout() {
         ArrayList<ShoppingItem> items = mAdapter.getItems();
         if (isBasketEmpty(items)) {
@@ -54,10 +62,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Clear all amounts
+     */
     private void clear() {
         mAdapter.clearAmounts();
     }
 
+    /**
+     * Checks if any items have an amount greater than 0
+     * @param items
+     * @return true if all amounts are 0
+     */
     private boolean isBasketEmpty(List<ShoppingItem> items) {
         for (ShoppingItem item : items) {
             if (item.getAmount() > 0)
